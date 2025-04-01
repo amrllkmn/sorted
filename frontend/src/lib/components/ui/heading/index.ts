@@ -1,3 +1,3 @@
-import Heading from "./heading.svelte";
+import Heading from './heading.svelte';
 
-export default Heading
+export default Heading;

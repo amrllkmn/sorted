@@ -1,3 +1,3 @@
-import Quadrant from "./quadrant.svelte";
+import Quadrant from './quadrant.svelte';
 
-export default Quadrant
+export default Quadrant;

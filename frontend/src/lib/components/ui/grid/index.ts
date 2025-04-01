@@ -1,3 +1,3 @@
-import Grid from "./grid.svelte";
+import Grid from './grid.svelte';
 
-export default Grid
+export default Grid;
