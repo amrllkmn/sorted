@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Card from '../card';
-	let { title, description, children, color } = $props();
+	let { title, description, children } = $props();
 </script>
 
 <Card.Root class="w-full">
