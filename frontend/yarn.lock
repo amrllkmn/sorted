@@ -2022,6 +2022,11 @@ svelte-check@^4.0.0:
     picocolors "^1.0.0"
     sade "^1.7.4"
 
+svelte-dnd-action@^0.9.60:
+  version "0.9.60"
+  resolved "https://registry.yarnpkg.com/svelte-dnd-action/-/svelte-dnd-action-0.9.60.tgz#d2f5b01b99649360067c79aea9bcd50731a4fc33"
+  integrity sha512-PTz9RlJiSTNXo0mIUGPmYXRMcqzLG/ghr79YqLrsOrq0dM4gQhXn97AkuImTalNuIxl/tohFK3uQPsEML+ZKeQ==
+
 svelte-eslint-parser@^0.43.0:
   version "0.43.0"
   resolved "https://registry.yarnpkg.com/svelte-eslint-parser/-/svelte-eslint-parser-0.43.0.tgz#649e80f65183c4c1d1536d03dcb903e0632f4da4"
