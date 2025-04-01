@@ -3,7 +3,6 @@
 	import { Button } from '../button';
 	import { TrashIcon } from '@lucide/svelte';
 	let { description } = $props();
-  import { flip } from 'svelte/animate';
 </script>
 
 <Card.Root>
