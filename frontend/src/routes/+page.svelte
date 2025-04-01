@@ -6,16 +6,16 @@
 
 <Heading />
 <Grid>
-	<Quadrant title="Do" description="Urgent and Important">
+	<Quadrant title="DO" description="Urgent and Important">
 		<div>Hello</div>
 	</Quadrant>
-	<Quadrant title="Schedule" description="Urgent and Not Important">
+	<Quadrant title="SCHEDULE" description="Urgent and Not Important">
 		<div>Hello</div>
 	</Quadrant>
-	<Quadrant title="Delay" description="Not Urgent and Important">
+	<Quadrant title="DELEGATE" description="Not Urgent and Important">
 		<div>Hello</div>
 	</Quadrant>
-	<Quadrant title="Eliminate" description="Not Urgent and Not Important">
+	<Quadrant title="ELIMINATE" description="Not Urgent and Not Important">
 		<div>Hello</div>
 	</Quadrant>
 </Grid>
