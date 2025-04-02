@@ -4,10 +4,9 @@
 	import Quadrant from '$lib/components/ui/quadrant';
 	import TaskForm from '$lib/components/ui/task-form';
 
-	let {data} = $props();
+	let { data } = $props();
 
-	let currentTasks = $state(data)
-
+	let currentTasks = $state(data);
 </script>
 
 <Heading />
@@ -15,7 +14,7 @@
 	<TaskForm />
 	<div class="flex flex-col gap-6 lg:flex-row">
 		<div class="lg:w-1/3">
-			<DumpingGround items={currentTasks.dumped}/>
+			<DumpingGround items={currentTasks.dumped} />
 		</div>
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:w-2/3">
 			<Quadrant
