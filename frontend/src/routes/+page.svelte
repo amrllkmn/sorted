@@ -33,10 +33,12 @@
 </script>
 
 <Heading />
-<Quadrant title="DUMP" description="All the stuff in your head goes here" items={items1}/>
-<Grid>
-	<Quadrant title="DO" description="Urgent and Important" items={[]} />
-	<Quadrant title="SCHEDULE" description="Urgent but Not Important" items={items2} />
-	<Quadrant title="DELEGATE" description="Not Urgent but Important" items={items3} />
-	<Quadrant title="ELIMINATE" description="Not Urgent and Not Important" items={items4} />
-</Grid>
+<section class="grid h-screen w-full grid-cols-[1fr_2fr] gap-6">
+	<Quadrant title="DUMP" description="All the stuff in your head goes here" items={items1} />
+	<Grid>
+		<Quadrant title="DO" description="Urgent and Important" items={[]} />
+		<Quadrant title="SCHEDULE" description="Urgent but Not Important" items={items2} />
+		<Quadrant title="DELEGATE" description="Not Urgent but Important" items={items3} />
+		<Quadrant title="ELIMINATE" description="Not Urgent and Not Important" items={items4} />
+	</Grid>
+</section>

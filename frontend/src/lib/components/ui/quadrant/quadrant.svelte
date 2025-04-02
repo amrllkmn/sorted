@@ -12,7 +12,7 @@
 	};
 </script>
 
-<Card.Root class="w-full">
+<Card.Root class="h-full w-full">
 	<Card.Header>
 		<Card.Title>{title}</Card.Title>
 		<Card.Description>{description}</Card.Description>
@@ -29,7 +29,7 @@
 			}}
 			onconsider={handleDndAction}
 			onfinalize={handleDndAction}
-			class="flex flex-col gap-2 min-h-[100px]"
+			class="flex max-h-[200px] min-h-[100px] flex-col gap-2 overflow-y-auto"
 		>
 			{#each items as item (item.id)}
 				<div animate:flip={{ duration: flipDurationMs }}>
