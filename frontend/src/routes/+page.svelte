@@ -8,28 +8,31 @@
 		{ id: 1, description: 'item1' },
 		{ id: 2, description: 'item2' },
 		{ id: 3, description: 'item3' },
-		{ id: 4, description: 'item4' }
-	];
-
-	let items2 = [
+		{ id: 4, description: 'item4' },
 		{ id: 5, description: 'item5' },
 		{ id: 6, description: 'item6' },
 		{ id: 7, description: 'item7' },
-		{ id: 8, description: 'item8' }
-	];
-
-	let items3 = [
+		{ id: 8, description: 'item8' },
 		{ id: 9, description: 'item9' },
 		{ id: 10, description: 'item10' },
 		{ id: 11, description: 'item11' },
-		{ id: 12, description: 'item12' }
-	];
-
-	let items4 = [
+		{ id: 12, description: 'item12' },
 		{ id: 13, description: 'item13' },
 		{ id: 14, description: 'item14' },
 		{ id: 15, description: 'item15' },
 		{ id: 16, description: 'item16' }
+	];
+
+	let items2 = [
+
+	];
+
+	let items3 = [
+
+	];
+
+	let items4 = [
+
 	];
 </script>
 

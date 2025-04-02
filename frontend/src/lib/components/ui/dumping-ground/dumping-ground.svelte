@@ -13,7 +13,7 @@
 </script>
 
 <Card.Root class="h-[600px] flex flex-col overflow-hidden">
-	<Card.Header class="pb-2 flex-shrink-0 flex flex-row items-center justify-between">
+	<Card.Header class="pb-2 flex-shrink-0">
 		<Card.Title>DUMP</Card.Title>
 		<Card.Description class="space-y-2">
 			<p class="text-sm font-medium">All the tasks in your head go here</p>
