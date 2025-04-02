@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Grid from '$lib/components/ui/grid/grid.svelte';
 	import Heading from '$lib/components/ui/heading';
 	import Quadrant from '$lib/components/ui/quadrant';
+	import TaskForm from '$lib/components/ui/task-form';
 
 	let items1 = [
 		{ id: 1, description: 'item1' },
@@ -33,12 +33,37 @@
 </script>
 
 <Heading />
-<section class="grid h-screen w-full grid-cols-[1fr_2fr] gap-6">
-	<Quadrant title="DUMP" description="All the stuff in your head goes here" items={items1} />
-	<Grid>
-		<Quadrant title="DO" description="Urgent and Important" items={[]} />
-		<Quadrant title="SCHEDULE" description="Urgent but Not Important" items={items2} />
-		<Quadrant title="DELEGATE" description="Not Urgent but Important" items={items3} />
-		<Quadrant title="ELIMINATE" description="Not Urgent and Not Important" items={items4} />
-	</Grid>
+<section class="space-y-8">
+	<TaskForm />
+	<div class="flex flex-col gap-6 lg:flex-row">
+		<div class="lg:w-1/3">
+			<Quadrant title="DUMP" subtitle="All the stuff in your head goes here" items={items1} />
+		</div>
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:w-2/3">
+			<Quadrant
+				title="DO"
+				subtitle="Urgent and Important"
+				description="Do these immediately"
+				items={[]}
+			/>
+			<Quadrant
+				title="SCHEDULE"
+				subtitle="Urgent but Not Important"
+				description="Find a time to do these"
+				items={items2}
+			/>
+			<Quadrant
+				title="DELEGATE"
+				subtitle="Not Urgent but Important"
+				description="If possible, delegate these"
+				items={items3}
+			/>
+			<Quadrant
+				title="ELIMINATE"
+				subtitle="Not Urgent and Not Important"
+				description="When possible, eliminate these"
+				items={items4}
+			/>
+		</div>
+	</div>
 </section>
