@@ -4,36 +4,16 @@
 	import Quadrant from '$lib/components/ui/quadrant';
 	import TaskForm from '$lib/components/ui/task-form';
 
-	let items1 = [
-		{ id: 1, description: 'item1' },
-		{ id: 2, description: 'item2' },
-		{ id: 3, description: 'item3' },
-		{ id: 4, description: 'item4' },
-		{ id: 5, description: 'item5' },
-		{ id: 6, description: 'item6' },
-		{ id: 7, description: 'item7' },
-		{ id: 8, description: 'item8' },
-		{ id: 9, description: 'item9' },
-		{ id: 10, description: 'item10' },
-		{ id: 11, description: 'item11' },
-		{ id: 12, description: 'item12' },
-		{ id: 13, description: 'item13' },
-		{ id: 14, description: 'item14' },
-		{ id: 15, description: 'item15' },
-		{ id: 16, description: 'item16' }
-	];
+	let {data} = $props();
 
-	let items2 = [
+	let currentTasks = $state(data.tasks)
 
-	];
+	let items1 = $derived.by(() => currentTasks.filter((task) => task.important === null && task.urgent === null))
+	let items2 = $derived.by(() => currentTasks.filter((task) => task.important === false && task.urgent === true))
 
-	let items3 = [
+	let items3 = $derived.by(() => currentTasks.filter((task) => task.important === true && task.urgent === false))
 
-	];
-
-	let items4 = [
-
-	];
+	let items4 = $derived.by(() => currentTasks.filter((task) => task.important === false && task.urgent === false))
 </script>
 
 <Heading />
