@@ -14,11 +14,8 @@
 	use:enhance={({ cancel, formData }) => {
 		cancel();
 		const description = formData.get('description') as string;
-    handler(description)
-    originalDescription = ''
-		return async ({ update }) => {
-			update();
-		};
+		handler(description);
+		originalDescription = '';
 	}}
 >
 	<Input placeholder="Dump your todos for the day..." name="description" bind:value={originalDescription} />
