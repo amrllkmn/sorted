@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Card from '../card';
-	let { title, description = '', subtitle, items } = $props();
+	let { items } = $props();
 	import { dndzone } from 'svelte-dnd-action';
 	import TaskItem from '../task-item/task-item.svelte';
 	import { flip } from 'svelte/animate';
@@ -12,12 +12,11 @@
 	};
 </script>
 
-<Card.Root class="h-[300px] flex flex-col overflow-hidden">
-	<Card.Header class="pb-2 flex-shrink-0">
-		<Card.Title>{title}</Card.Title>
+<Card.Root class="h-[600px] flex flex-col overflow-hidden">
+	<Card.Header class="pb-2 flex-shrink-0 flex flex-row items-center justify-between">
+		<Card.Title>DUMP</Card.Title>
 		<Card.Description class="space-y-2">
-			<p class="text-sm font-medium">{subtitle}</p>
-			<p class="text-xs">{description}</p>
+			<p class="text-sm font-medium">All the tasks in your head go here</p>
 		</Card.Description>
 	</Card.Header>
 	<Card.Content class="flex-1 overflow-hidden">
@@ -32,7 +31,7 @@
 			}}
 			onconsider={handleDndAction}
 			onfinalize={handleDndAction}
-			class="flex flex-col h-full space-y-2 overflow-y-auto"
+			class="flex flex-col space-y-2 h-full overflow-y-auto"
 		>
 			{#each items as item (item.id)}
 				<div animate:flip={{ duration: flipDurationMs }}>
@@ -42,4 +41,3 @@
 		</div>
 	</Card.Content>
 </Card.Root>
-
