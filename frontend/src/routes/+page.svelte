@@ -8,10 +8,18 @@
 	let { data } = $props();
 
 	let currentTasks = $state(data.tasks);
-	let scheduledTasks = $derived(currentTasks.filter((task) => task.important === false && task.urgent === true));
-	let delegatedTasks = $derived(currentTasks.filter((task) => task.important === true && task.urgent === false));
-	let dumpedTasks = $derived(currentTasks.filter((task) => task.important === null && task.urgent === null))
-	let eliminatedTasks = $derived(currentTasks.filter((task) => task.important === false && task.urgent === false))
+	let scheduledTasks = $derived(
+		currentTasks.filter((task) => task.important === false && task.urgent === true)
+	);
+	let delegatedTasks = $derived(
+		currentTasks.filter((task) => task.important === true && task.urgent === false)
+	);
+	let dumpedTasks = $derived(
+		currentTasks.filter((task) => task.important === null && task.urgent === null)
+	);
+	let eliminatedTasks = $derived(
+		currentTasks.filter((task) => task.important === false && task.urgent === false)
+	);
 
 	const addTaskHandler = (description: string) => {
 		const newTask: TTask = {
@@ -22,13 +30,13 @@
 		};
 
 		// ✅ Replace the array reference so Svelte detects the change
-		currentTasks.push(newTask)
+		currentTasks.push(newTask);
 	};
 </script>
 
 <Heading />
 <section class="space-y-8">
-	<TaskForm handler={addTaskHandler}/>
+	<TaskForm handler={addTaskHandler} />
 	<div class="flex flex-col gap-6 lg:flex-row">
 		<div class="lg:w-1/3">
 			<DumpingGround items={dumpedTasks} />

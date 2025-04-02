@@ -3,9 +3,9 @@
 	import { Button } from '$lib/components/ui/button';
 	import { CirclePlus } from '@lucide/svelte';
 	import { enhance } from '$app/forms';
-  let originalDescription = $state('')
+	let originalDescription = $state('');
 
-  let { handler } = $props();
+	let { handler } = $props();
 </script>
 
 <form
@@ -18,7 +18,11 @@
 		originalDescription = '';
 	}}
 >
-	<Input placeholder="Dump your todos for the day..." name="description" bind:value={originalDescription} />
+	<Input
+		placeholder="Dump your todos for the day..."
+		name="description"
+		bind:value={originalDescription}
+	/>
 	<Button>
 		<CirclePlus />
 		Add task
