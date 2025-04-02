@@ -12,8 +12,8 @@
 	};
 </script>
 
-<Card.Root class="h-[300px] flex flex-col overflow-hidden">
-	<Card.Header class="pb-2 flex-shrink-0">
+<Card.Root class="flex h-[300px] flex-col overflow-hidden">
+	<Card.Header class="flex-shrink-0 pb-2">
 		<Card.Title>{title}</Card.Title>
 		<Card.Description class="space-y-2">
 			<p class="text-sm font-medium">{subtitle}</p>
@@ -32,7 +32,7 @@
 			}}
 			onconsider={handleDndAction}
 			onfinalize={handleDndAction}
-			class="flex flex-col h-full space-y-2 overflow-y-auto"
+			class="flex h-full flex-col space-y-2 overflow-y-auto"
 		>
 			{#each items as item (item.id)}
 				<div animate:flip={{ duration: flipDurationMs }}>
@@ -42,4 +42,3 @@
 		</div>
 	</Card.Content>
 </Card.Root>
-

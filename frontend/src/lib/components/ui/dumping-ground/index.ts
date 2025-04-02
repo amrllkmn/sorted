@@ -1,3 +1,3 @@
-import DumpingGround from "./dumping-ground.svelte";
+import DumpingGround from './dumping-ground.svelte';
 
-export default DumpingGround
+export default DumpingGround;
