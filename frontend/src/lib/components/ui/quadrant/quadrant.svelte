@@ -29,7 +29,7 @@
 			}}
 			onconsider={handleDndAction}
 			onfinalize={handleDndAction}
-			class="flex flex-col gap-2"
+			class="flex flex-col gap-2 min-h-[100px]"
 		>
 			{#each items as item (item.id)}
 				<div animate:flip={{ duration: flipDurationMs }}>
