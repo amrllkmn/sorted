@@ -1,5 +1,7 @@
-import { tasks } from '../data';
+import { GetAllTasks } from '$lib/wailsjs/go/main/App';
 
-export const load = () => {
+export const load = async () => {
+	const tasks = await GetAllTasks();
+
 	return { tasks };
 };
