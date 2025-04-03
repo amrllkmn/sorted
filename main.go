@@ -2,6 +2,10 @@ package main
 
 import (
 	"embed"
+	"log"
+
+	"github.com/amrllkmn/sorted/internal/database"
+	"github.com/amrllkmn/sorted/internal/tasks"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -12,8 +16,19 @@ import (
 var assets embed.FS
 
 func main() {
+
+	// Init DB
+	db := database.InitDB()
+	dbErr := db.AutoMigrate(&tasks.Task{})
+	if dbErr != nil {
+		log.Fatal("Migration failed")
+	}
+
+	taskRepo := tasks.NewSQLiteTaskRepository(db)
+
+	taskService := tasks.NewTaskService(taskRepo)
 	// Create an instance of the app structure
-	app := NewApp()
+	app := NewApp(taskService)
 
 	// Create application with options
 	err := wails.Run(&options.App{
