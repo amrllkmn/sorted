@@ -3,6 +3,8 @@
 	import { Button } from '$lib/components/ui/button';
 	import { CirclePlus } from '@lucide/svelte';
 	import { enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
+	import { error } from '@sveltejs/kit';
 	let originalDescription = $state('');
 
 	let { handler } = $props();
@@ -14,8 +16,16 @@
 	use:enhance={({ cancel, formData }) => {
 		cancel();
 		const description = formData.get('description') as string;
+
+		if (!description || description.trim() === '') {
+			error(400, {
+				message: 'description cannot be empty'
+			});
+		}
 		handler(description);
 		originalDescription = '';
+
+		invalidateAll();
 	}}
 >
 	<Input
@@ -23,7 +33,7 @@
 		name="description"
 		bind:value={originalDescription}
 	/>
-	<Button>
+	<Button type="submit">
 		<CirclePlus />
 		Add task
 	</Button>
