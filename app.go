@@ -2,17 +2,22 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"log"
+
+	"github.com/amrllkmn/sorted/internal/tasks"
 )
 
 // App struct
 type App struct {
-	ctx context.Context
+	ctx         context.Context
+	taskService tasks.TasksService
 }
 
 // NewApp creates a new App application struct
-func NewApp() *App {
-	return &App{}
+func NewApp(taskService tasks.TasksService) *App {
+	return &App{
+		taskService: taskService,
+	}
 }
 
 // startup is called when the app starts. The context is saved
@@ -21,7 +26,12 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-// Greet returns a greeting for the given name
-func (a *App) Greet(name string) string {
-	return fmt.Sprintf("Hello %s, It's show time!", name)
+func (a *App) GetAllTasks() []tasks.Task {
+	tasks, err := a.taskService.GetTasks()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return tasks
 }
