@@ -14,7 +14,7 @@ type Task struct {
 
 type TaskRepository interface {
 	GetAllTasks(tasks *[]Task) error
-	// CreateTask(task *Task) error
+	CreateTask(taskDesc string) (*Task, error)
 	// DeleteTaskById(id int) error
 }
 
@@ -32,7 +32,16 @@ func (tr *SQLiteTaskRepository) GetAllTasks(tasks *[]Task) error {
 	return nil
 }
 
-// func (tr *SQLiteTaskRepository) CreateTask(task *Task) error
+func (tr *SQLiteTaskRepository) CreateTask(taskDesc string) (*Task, error) {
+	task := Task{Description: taskDesc}
+	result := tr.DB.Create(&task)
+
+	if result.Error != nil {
+		return &Task{}, result.Error
+	}
+	return &task, nil
+}
+
 // func (tr *SQLiteTaskRepository) DeleteTaskById(id int) error
 
 func NewSQLiteTaskRepository(db *gorm.DB) TaskRepository {
