@@ -6,6 +6,7 @@ import (
 
 type Task struct {
 	gorm.Model
+	ID          uint   `json:"id"`
 	Description string `json:"description"`
 	Urgent      *bool  `json:"urgent"`
 	Important   *bool  `json:"important"`

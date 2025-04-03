@@ -7,6 +7,7 @@ export namespace tasks {
 		UpdatedAt: any;
 		// Go type: gorm
 		DeletedAt: any;
+		id: number;
 		description: string;
 		urgent?: boolean;
 		important?: boolean;
@@ -21,6 +22,7 @@ export namespace tasks {
 			this.CreatedAt = this.convertValues(source['CreatedAt'], null);
 			this.UpdatedAt = this.convertValues(source['UpdatedAt'], null);
 			this.DeletedAt = this.convertValues(source['DeletedAt'], null);
+			this.id = source['id'];
 			this.description = source['description'];
 			this.urgent = source['urgent'];
 			this.important = source['important'];
