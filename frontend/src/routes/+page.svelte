@@ -7,8 +7,6 @@
 
 	let { data } = $props();
 
-	console.log(data.tasks);
-
 	let currentTasks = $state(data.tasks);
 	let scheduledTasks = $derived(
 		currentTasks.filter((task) => task.important === false && task.urgent === true)
