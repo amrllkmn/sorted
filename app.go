@@ -46,3 +46,12 @@ func (a *App) CreateTask(description string) (*tasks.Task, error) {
 
 	return task, nil
 }
+
+func (a *App) DeleteTask(id int) error {
+	err := a.taskService.DeleteTask(id)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	return nil
+}

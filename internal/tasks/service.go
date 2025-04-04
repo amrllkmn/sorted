@@ -2,7 +2,7 @@ package tasks
 
 type TasksService interface {
 	GetTasks() ([]Task, error)
-	// DeleteTask()
+	DeleteTask(id int) error
 	CreateTask(description string) (*Task, error)
 }
 
@@ -21,7 +21,16 @@ func (svc *Service) GetTasks() ([]Task, error) {
 	return tasks, nil
 }
 
-// func (svc *Service) DeleteTask()
+func (svc *Service) DeleteTask(id int) error {
+	err := svc.repo.DeleteTaskById(id)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (svc *Service) CreateTask(description string) (*Task, error) {
 	task, err := svc.repo.CreateTask(description)
 
