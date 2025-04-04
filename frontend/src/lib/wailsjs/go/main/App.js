@@ -13,3 +13,7 @@ export function DeleteTask(arg1) {
 export function GetAllTasks() {
 	return window['go']['main']['App']['GetAllTasks']();
 }
+
+export function UpdateTaskStatus(arg1, arg2, arg3) {
+	return window['go']['main']['App']['UpdateTaskStatus'](arg1, arg2, arg3);
+}

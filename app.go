@@ -55,3 +55,13 @@ func (a *App) DeleteTask(id int) error {
 	}
 	return nil
 }
+
+func (a *App) UpdateTaskStatus(id int, urgent bool, important bool) error {
+	err := a.taskService.UpdateTaskStatus(id, urgent, important)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return nil
+}
