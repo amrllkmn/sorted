@@ -35,3 +35,14 @@ func (a *App) GetAllTasks() []tasks.Task {
 
 	return tasks
 }
+
+func (a *App) CreateTask(description string) (*tasks.Task, error) {
+	task, err := a.taskService.CreateTask(description)
+
+	if err != nil {
+		log.Fatal(err)
+
+	}
+
+	return task, nil
+}

@@ -1,14 +1,14 @@
 <script lang="ts">
+	import { invalidateAll } from '$app/navigation';
 	import DumpingGround from '$lib/components/ui/dumping-ground';
 	import Heading from '$lib/components/ui/heading';
 	import Quadrant from '$lib/components/ui/quadrant';
 	import TaskForm from '$lib/components/ui/task-form';
+	import { CreateTask } from '$lib/wailsjs/go/main/App.js';
 
 	let { data } = $props();
 
-	console.log(data.tasks)
-
-	let currentTasks = $state(data.tasks);
+	let currentTasks = $derived(data.tasks);
 	let scheduledTasks = $derived(
 		currentTasks.filter((task) => task.important === false && task.urgent === true)
 	);
@@ -22,22 +22,16 @@
 		currentTasks.filter((task) => task.important === false && task.urgent === false)
 	);
 
-	// const addTaskHandler = (description: string) => {
-	// 	const newTask: tasks.Task = {
-	// 		ID: currentTasks.length + 1,
-	// 		description,
-	// 		urgent: undefined,
-	// 		important: undefined
-	// 	};
+	const addTaskHandler = async (description: string) => {
+		await CreateTask(description);
 
-	// 	// ✅ Replace the array reference so Svelte detects the change
-	// 	currentTasks.push(newTask);
-	// };
+		await invalidateAll();
+	};
 </script>
 
 <Heading />
 <section class="space-y-8">
-	<!-- <TaskForm handler={addTaskHandler} /> -->
+	<TaskForm handler={addTaskHandler} />
 	<div class="flex flex-col gap-6 lg:flex-row">
 		<div class="lg:w-1/3">
 			<DumpingGround items={dumpedTasks} />

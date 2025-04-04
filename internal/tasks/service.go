@@ -3,7 +3,7 @@ package tasks
 type TasksService interface {
 	GetTasks() ([]Task, error)
 	// DeleteTask()
-	// CreateTask()
+	CreateTask(description string) (*Task, error)
 }
 
 type Service struct {
@@ -22,7 +22,15 @@ func (svc *Service) GetTasks() ([]Task, error) {
 }
 
 // func (svc *Service) DeleteTask()
-// func (svc *Service) CreateTask()
+func (svc *Service) CreateTask(description string) (*Task, error) {
+	task, err := svc.repo.CreateTask(description)
+
+	if err != nil {
+		return &Task{}, err
+	}
+
+	return task, nil
+}
 
 func NewTaskService(repo TaskRepository) TasksService {
 	return &Service{

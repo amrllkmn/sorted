@@ -5,6 +5,7 @@
 	import { enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import { error } from '@sveltejs/kit';
+
 	let originalDescription = $state('');
 
 	let { handler } = $props();
@@ -24,8 +25,6 @@
 		}
 		handler(description);
 		originalDescription = '';
-
-		invalidateAll();
 	}}
 >
 	<Input
