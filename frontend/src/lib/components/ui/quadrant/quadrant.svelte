@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Card from '../card';
-	let { title, description = '', subtitle, items } = $props();
+	let { title, description = '', subtitle, items, deleteTaskHandler } = $props();
 	import { dndzone } from 'svelte-dnd-action';
 	import TaskItem from '../task-item/task-item.svelte';
 	import { flip } from 'svelte/animate';
@@ -36,7 +36,11 @@
 		>
 			{#each items as item (item.id)}
 				<div animate:flip={{ duration: flipDurationMs }}>
-					<TaskItem description={item.description} />
+					<TaskItem
+						description={item.description}
+						handleDeleteTask={deleteTaskHandler}
+						id={item.id}
+					/>
 				</div>
 			{/each}
 		</div>

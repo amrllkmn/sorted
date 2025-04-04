@@ -4,4 +4,6 @@ import { tasks } from '../models';
 
 export function CreateTask(arg1: string): Promise<tasks.Task>;
 
+export function DeleteTask(arg1: number): Promise<void>;
+
 export function GetAllTasks(): Promise<Array<tasks.Task>>;

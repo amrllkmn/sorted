@@ -1,9 +1,10 @@
 <script lang="ts">
 	import * as Card from '../card';
-	let { items } = $props();
+	let { items, deleteTaskHandler } = $props();
 	import { dndzone } from 'svelte-dnd-action';
 	import TaskItem from '../task-item/task-item.svelte';
 	import { flip } from 'svelte/animate';
+	import { tasks } from '$lib/wailsjs/go/models';
 
 	const flipDurationMs = 300;
 
@@ -35,7 +36,11 @@
 		>
 			{#each items as item (item.id)}
 				<div animate:flip={{ duration: flipDurationMs }}>
-					<TaskItem description={item.description} />
+					<TaskItem
+						description={item.description}
+						handleDeleteTask={deleteTaskHandler}
+						id={item.id}
+					/>
 				</div>
 			{/each}
 		</div>
