@@ -25,8 +25,6 @@
 		}
 		handler(description);
 		originalDescription = '';
-
-		invalidateAll();
 	}}
 >
 	<Input

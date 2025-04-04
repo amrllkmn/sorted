@@ -22,10 +22,10 @@
 	);
 
 	const addTaskHandler = async (description: string) => {
-		const newTask = await CreateTask(description);
+		await CreateTask(description);
 
 		// ✅ Replace the array reference so Svelte detects the change
-		currentTasks.push(newTask);
+		currentTasks = await GetAllTasks();
 	};
 </script>
 
