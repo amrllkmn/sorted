@@ -53,28 +53,28 @@
 				description="Do these immediately"
 				items={[]}
 				{deleteTaskHandler}
-			/>
+			/> // on drag finalize set urgent: true important: true
 			<Quadrant
 				title="SCHEDULE"
 				subtitle="Urgent but Not Important"
 				description="Find a time to do these"
 				items={scheduledTasks}
 				{deleteTaskHandler}
-			/>
+			/> // on drag finalize set urgent: true important: false
 			<Quadrant
 				title="DELEGATE"
 				subtitle="Not Urgent but Important"
 				description="If possible, delegate these"
 				items={delegatedTasks}
 				{deleteTaskHandler}
-			/>
+			/> // on drag finalize set urgent: false important: true
 			<Quadrant
 				title="ELIMINATE"
 				subtitle="Not Urgent and Not Important"
 				description="When possible, eliminate these"
 				items={eliminatedTasks}
 				{deleteTaskHandler}
-			/>
+			/> // on drag finalize set urgent: false important: false
 		</div>
 	</div>
 </section>

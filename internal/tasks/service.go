@@ -4,6 +4,7 @@ type TasksService interface {
 	GetTasks() ([]Task, error)
 	DeleteTask(id int) error
 	CreateTask(description string) (*Task, error)
+	UpdateTaskStatus(id int, urgent bool, important bool) error
 }
 
 type Service struct {
@@ -39,6 +40,16 @@ func (svc *Service) CreateTask(description string) (*Task, error) {
 	}
 
 	return task, nil
+}
+
+func (svc *Service) UpdateTaskStatus(id int, urgent bool, important bool) error {
+	err := svc.repo.UpdateTaskStatus(id, urgent, important)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func NewTaskService(repo TaskRepository) TasksService {
