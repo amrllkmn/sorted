@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Card from '../card';
-	let { title, description = '', subtitle, items, deleteTaskHandler } = $props();
+	let { title, description = '', subtitle, items, deleteTaskHandler, updateTaskHandler } = $props();
 	import { dndzone } from 'svelte-dnd-action';
 	import TaskItem from '../task-item/task-item.svelte';
 	import { flip } from 'svelte/animate';
@@ -9,6 +9,13 @@
 
 	const handleDndAction = (e: { detail: { items: any } }) => {
 		items = e.detail.items;
+	};
+
+	const handleUpdateTask = (e: { detail: { items: any } }) => {
+		items = e.detail.items;
+		items.forEach((item: { id: any }) => {
+			updateTaskHandler(item.id);
+		});
 	};
 </script>
 
@@ -31,7 +38,7 @@
 				dropTargetClasses: ['bg-secondary', 'rounded', 'border-xl']
 			}}
 			onconsider={handleDndAction}
-			onfinalize={handleDndAction}
+			onfinalize={handleUpdateTask}
 			class="flex h-full flex-col space-y-2 overflow-y-auto"
 		>
 			{#each items as item (item.id)}
