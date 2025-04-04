@@ -8,19 +8,11 @@
 
 	let { data } = $props();
 
-	let currentTasks = $derived(data.tasks);
-	let scheduledTasks = $derived(
-		currentTasks.filter((task) => task.important === false && task.urgent === true)
-	);
-	let delegatedTasks = $derived(
-		currentTasks.filter((task) => task.important === true && task.urgent === false)
-	);
-	let dumpedTasks = $derived(
-		currentTasks.filter((task) => task.important === null && task.urgent === null)
-	);
-	let eliminatedTasks = $derived(
-		currentTasks.filter((task) => task.important === false && task.urgent === false)
-	);
+	let scheduledTasks = $derived(data.scheduled);
+	let delegatedTasks = $derived(data.delegated);
+	let dumpedTasks = $derived(data.dumped);
+	let eliminatedTasks = $derived(data.eliminated);
+	let tasksToBeDone = $derived(data.toBeDone);
 
 	const addTaskHandler = async (description: string) => {
 		await CreateTask(description);
