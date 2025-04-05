@@ -71,12 +71,17 @@ jobs:
       - name: Build app with Wails
         run: wails build -platform ${{ matrix.platform }}
 
-      - name: Create ZIP files for each platform
+      - name: Create ZIP files for Windows
+        if: runner.os == 'Windows'
+        shell: bash
+        run: |
+          zip -j ${{ matrix.name }}.zip ./${{ matrix.path }}
+
+      - name: Create ZIP files for Linux and macOS
+        if: runner.os != 'Windows'
         run: |
           if [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then
             chmod -R +x ./${{matrix.path}}
-            zip ./${{matrix.name}}.zip ./${{matrix.path}}
-          elif [ "${{ matrix.os }}" == "windows-latest" ]; then
             zip ./${{matrix.name}}.zip ./${{matrix.path}}
           elif [ "${{ matrix.os }}" == "macos-latest" ]; then
             chmod -R +x ./${{matrix.path}}
