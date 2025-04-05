@@ -23,14 +23,17 @@ jobs:
             platform: linux/amd64
             ext: ""
             path: build/bin/sorted.app/Contents/Linux/sorted
+            name: sorted-linux
           - os: windows-latest
             platform: windows/amd64
             ext: ".exe"
             path: build/bin/sorted.app/Contents/Windows/sorted.exe
+            name: sorted-win
           - os: macos-latest
             platform: darwin/universal
             ext: ""
-            path: build/bin/sorted.app/Contents/MacOS/sorted # Fixed path for macOS app bundle
+            path: build/bin/sorted.app/Contents/MacOS/sorted
+            name: sorted-mac # Fixed path for macOS app bundle
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -61,7 +64,7 @@ jobs:
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
-          name: sorted-${{ matrix.platform }}
+          name: sorted-${{ matrix.name }}
           path: ${{ matrix.path }} # Corrected for macOS app bundle path
 
   release:
