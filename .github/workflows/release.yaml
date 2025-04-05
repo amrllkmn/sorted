@@ -1,9 +1,12 @@
 name: Wails Build and Release (Dev Mode)
 
 on:
-  push: # Runs on every push to any branch
-    branches:
-      - "*"
+  push:
+    branches: ["*"]
+    tags:
+      - "v*"
+  pull_request:
+    branches: [main]
 
 env:
   NODE_OPTIONS: "--max-old-space-size=4096"
