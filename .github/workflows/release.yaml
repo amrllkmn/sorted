@@ -31,6 +31,7 @@ jobs:
           build-platform: ${{ matrix.build.platform }}
           go-version: 1.23
           node-version: 18
+          package: false
 
       # 👇 Upload build artifact per platform
       - name: Upload build output
