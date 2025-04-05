@@ -96,7 +96,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./artifacts
+            ./artifacts/sorted-sorted-linux/sorted
+            ./artifacts/sorted-sorted-win/sorted.exe
+            ./artifacts/sorted-sorted-mac/sorted
           draft: false
           prerelease: false
           generate_release_notes: true
