@@ -72,10 +72,10 @@ jobs:
 
       - name: Create ZIP files for Windows
         if: runner.os == 'Windows'
-        shell: bash
+        shell: pwsh
         run: |
-          New-Item -ItemType Directory -Path dist
-          Compress-Archive -Path ${{ matrix.path }} -DestinationPath ./${{ matrix.name }}.zip
+          New-Item -ItemType Directory -Path dist -Force
+          Compress-Archive -Path ${{ matrix.path }} -DestinationPath .\${{ matrix.name }}.zip
 
       - name: Create ZIP files for Linux and macOS
         if: runner.os != 'Windows'
