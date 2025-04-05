@@ -22,7 +22,7 @@ jobs:
           - os: ubuntu-22.04
             platform: linux/amd64
             ext: ""
-            path: build/bin/sorted.app/Contents/Linux/sorted
+            path: build/bin/sorted
             name: sorted-linux
           - os: windows-latest
             platform: windows/amd64
