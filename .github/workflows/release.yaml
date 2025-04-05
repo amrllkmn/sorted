@@ -96,7 +96,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./artifacts/**/*
+            ./artifacts
           draft: false
           prerelease: false
           generate_release_notes: true
