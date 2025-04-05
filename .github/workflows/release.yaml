@@ -27,7 +27,7 @@ jobs:
           - os: windows-latest
             platform: windows/amd64
             ext: ".exe"
-            path: build/bin/sorted.app/Contents/Windows/sorted.exe
+            path: build/bin/sorted.exe
             name: sorted-win
           - os: macos-latest
             platform: darwin/universal
@@ -57,7 +57,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y \
             libgtk-3-dev \
-            libwebkit2gtk-4.0-dev \
             libgirepository1.0-dev \
             pkg-config
 
