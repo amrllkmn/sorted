@@ -92,6 +92,12 @@ jobs:
       - name: List artifacts
         run: ls -R ./artifacts
 
+      - name: Rename binaries to avoid conflicts
+        run: |
+          mv ./artifacts/sorted-sorted-linux/sorted ./artifacts/sorted-sorted-linux/sorted-linux
+          mv ./artifacts/sorted-sorted-mac/sorted ./artifacts/sorted-sorted-mac/sorted-mac
+          mv ./artifacts/sorted-sorted-win/sorted.exe ./artifacts/sorted-sorted-win/sorted-win.exe
+
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
