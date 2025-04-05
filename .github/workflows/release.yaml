@@ -1,78 +1,75 @@
-name: Build and Release Sorted App
+name: Wails Build and Release (Dev Mode)
 
 on:
-  push:
-    branches: ["*"]
-    tags:
-      - "v*"
-  pull_request:
+  push: # Runs on every push to any branch
     branches:
-      - main
+      - "*"
 
 env:
   NODE_OPTIONS: "--max-old-space-size=4096"
 
 jobs:
   build:
+    name: Build and Upload
     strategy:
       fail-fast: false
       matrix:
-        build:
-          - name: sorted
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
             platform: linux/amd64
-            os: ubuntu-latest
-          - name: sorted
+            ext: ""
+          - os: windows-latest
             platform: windows/amd64
-            os: windows-latest
-          - name: sorted
+            ext: ".exe"
+          - os: macos-latest
             platform: darwin/universal
-            os: macos-latest
+            ext: ""
+    runs-on: ${{ matrix.os }}
 
-    runs-on: ${{ matrix.build.os }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Build app with Wails
-        uses: dAppServer/wails-build-action@v2.2
+      - name: Set up Go
+        uses: actions/setup-go@v4
         with:
-          build-name: ${{ matrix.build.name }}
-          build-platform: ${{ matrix.build.platform }}
-          go-version: 1.21
-          node-version: 18
-          package: false # Don't make installers (.dmg, .msi, etc.)
+          go-version: 1.23
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4.3.1
+      - name: Set up Node
+        uses: actions/setup-node@v3
         with:
-          name: ${{ matrix.build.platform }}
-          path: build/bin
+          node-version: 18
+
+      - name: Install Wails CLI
+        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
+
+      - name: Add Go bin to path
+        run: echo "${HOME}/go/bin" >> $GITHUB_PATH
+
+      - name: Build app with Wails
+        run: wails build -platform ${{ matrix.platform }}
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: sorted-${{ matrix.platform }}
+          path: build/bin/sorted${{ matrix.ext }}
 
   release:
-    name: Create GitHub Release
+    name: Create GitHub Release (Dev)
     needs: build
-    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4.1.7
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
         with:
-          path: artifacts
+          path: ./artifacts
 
-      - name: List downloaded files
+      - name: List artifacts
         run: ls -R ./artifacts
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: artifacts/**/*
-          draft: false
-          prerelease: false
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: (Skip Release - Just Confirm Artifacts)
+        run: echo "Release would happen here. Artifacts downloaded."
