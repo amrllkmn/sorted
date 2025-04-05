@@ -74,12 +74,13 @@ jobs:
       - name: Create ZIP files for each platform
         run: |
           if [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then
-            zip ./${{matrix.name}}.zip ${{matrix.path}}
+            chmod -R +x ./${{matrix.path}}
+            zip ./${{matrix.name}}.zip ./${{matrix.path}}
           elif [ "${{ matrix.os }}" == "windows-latest" ]; then
-            zip ./${{matrix.name}}.zip ${{matrix.path}}
+            zip ./${{matrix.name}}.zip ./${{matrix.path}}
           elif [ "${{ matrix.os }}" == "macos-latest" ]; then
             chmod -R +x ./${{matrix.path}}
-            zip ./${{matrix.name}}.zip ${{matrix.path}}
+            zip ./${{matrix.name}}.zip ./${{matrix.path}}
           fi
 
       - name: Upload binary
