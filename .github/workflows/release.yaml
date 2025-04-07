@@ -1,9 +1,8 @@
-name: Wails Build and Release
+name: Wails Build
+
 on:
   push:
     branches: ["main"] # Trigger on push to main branch
-    tags:
-      - "v*" # Trigger on tags starting with v (e.g., v1.0.0, v1.1.0)
   pull_request:
     branches:
       - "main" # Trigger on pull requests targeting the main branch
@@ -13,7 +12,7 @@ env:
 
 jobs:
   build:
-    name: Build and Upload
+    name: Build and Verify
     strategy:
       fail-fast: false
       matrix:
@@ -21,19 +20,10 @@ jobs:
         include:
           - os: ubuntu-22.04
             platform: linux/amd64
-            ext: ""
-            path: build/bin/sorted
-            name: sorted-linux
           - os: windows-latest
             platform: windows/amd64
-            ext: ".exe"
-            path: build/bin/sorted.exe
-            name: sorted-win
           - os: macos-latest
             platform: darwin/universal
-            ext: ""
-            path: build/bin/sorted.app/Contents/MacOS/sorted
-            name: sorted-mac # Fixed path for macOS app bundle
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -51,6 +41,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+
       - name: Install Dependencies on Linux
         if: runner.os == 'Linux'
         run: |
@@ -69,55 +60,3 @@ jobs:
 
       - name: Build app with Wails
         run: wails build -platform ${{ matrix.platform }}
-
-      - name: Create ZIP files for Windows
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory -Path dist -Force
-          Compress-Archive -Path ${{ matrix.path }} -DestinationPath .\${{ matrix.name }}.zip
-
-      - name: Create ZIP files for Linux and macOS
-        if: runner.os != 'Windows'
-        run: |
-          if [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then
-            chmod -R +x ./${{matrix.path}}
-            zip ./${{matrix.name}}.zip ./${{matrix.path}}
-          elif [ "${{ matrix.os }}" == "macos-latest" ]; then
-            chmod -R +x ./${{matrix.path}}
-            zip ./${{matrix.name}}.zip ./${{matrix.path}}
-          fi
-
-      - name: Upload binaries
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.name }}.zip
-          path: ./${{matrix.name}}.zip
-
-  release:
-    name: Create GitHub Release
-    needs: build
-    if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download all build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ./artifacts
-
-      - name: List artifacts
-        run: ls -R ./artifacts
-
-      - name: Create GitHub release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            ./artifacts/sorted-linux.zip/sorted-linux.zip
-            ./artifacts/sorted-win.zip/sorted-win.zip
-            ./artifacts/sorted-mac.zip/sorted-mac.zip
-          draft: false
-          prerelease: false
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
